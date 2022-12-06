@@ -200,7 +200,6 @@ let startMST = async () => {
         isRunning = false
         return
     }
-    console.log(currentNode.value)
     mstKey1 = getSetValueByIndex(currentNode.value[0],0).substring(1,2)
     mstKey2 = getSetValueByIndex(currentNode.value[0],1).substring(1,2)
     cy.elements().getElementById(getSetValueByIndex(currentNode.value[0],0)).addClass('highlighted')

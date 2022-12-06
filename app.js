@@ -92,7 +92,7 @@ var cy = cytoscape({
       },
   
     layout: {
-      name: 'cose',
+      name: 'null',
       directed: false,
       
       padding: 10
