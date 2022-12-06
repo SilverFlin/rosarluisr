@@ -1,79 +1,8 @@
 //Lo que representa cada Nodo
-const vertex = new Map([
-    ['(a) Puebla'],
-    ['(b) Tehuacan'],
-    ['(c) Cholula de Rivadavia'],
-    ['(d) Atlixco'],
-    ['(e) Amozoc'],
-    ['(f) San Martin'],
-    ['(g) Teziutlan'],
-    ['(h) Huauchinango'],
-    ['(i) Tlaxcalancingo'],
-    ['(j) Izúcar'],
-    ['(k) San Andres Cholula'],
-    ['(l) Xicotepec'],
-    ['(m) Zacatlan'],
-    ['(n) Tecamachalco'],
-    ['(o) Ajalpan'],
-    ['(p) Sanctórum'],
-    ['(q) Tepeaca'],
-    ['(r) Moyotzingo'],
-    ['(s) Acatzingo'],
-    ['(t) Huejotzingo'],
-    ['(u) Cuautlancingo'],
-    ['(v) Ciudad Serdán'],
-    ['(w) Acajete'],
-])
+const vertex = new Map(verticesArr)
 
 //Esto de aqui es el grafo junto el peso de las aristas
-const G = new Map([
-    [{source: '(o) Ajalpan', target: '(b) Tehuacan'}, 22],
-    [{source: '(b) Tehuacan', target: '(n) Tecamachalco' }, 63.7],
-    [{source: '(n) Tecamachalco', target: '(q) Tepeaca'}, 22.1],
-    [{source: '(n) Tecamachalco', target: '(s) Acatzingo'}, 26.3],
-    [{source: '(s) Acatzingo', target: '(e) Amozoc' }, 30.3],
-    [{source: '(s) Acatzingo', target: '(g) Teziutlan'}, 133],
-    [{source: '(s) Acatzingo', target: '(q) Tepeaca' }, 20.8],
-    [{source: '(g) Teziutlan', target: '(m) Zacatlan' }, 199],
-    [{source: '(m) Zacatlan', target: '(h) Huauchinango' }, 57.5],
-    [{source: '(h) Huauchinango', target: '(l) Xicotepec' }, 21.5],
-    [{source: '(q) Tepeaca', target: '(e) Amozoc' }, 18.7],
-    [{source: '(q) Tepeaca', target: '(a) Puebla' }, 41.2],
-    [{source: '(e) Amozoc', target: '(a) Puebla'}, 25],
-    [{source: '(j) Izúcar', target: '(d) Atlixco' }, 39.4],
-    [{source: '(d) Atlixco', target: '(f) San Martin' }, 55.1],
-    [{source: '(f) San Martin', target: '(r) Moyotzingo' }, 6.2],
-    [{source: '(r) Moyotzingo', target: '(t) Huejotzingo' }, 21.9],
-    [{source: '(r) Moyotzingo', target: '(a) Puebla' }, 44.6],
-    [{source: '(t) Huejotzingo', target: '(c) Cholula de Rivadavia' }, 16.5],
-    [{source: '(t) Huejotzingo', target: '(k) San Andres Cholula' }, 19.9],
-    [{source: '(c) Cholula de Rivadavia', target: '(k) San Andres Cholula' }, 3],
-    [{source: '(c) Cholula de Rivadavia', target: '(p) Sanctórum'}, 12.8],
-    [{source: '(p) Sanctórum', target: '(a) Puebla'}, 13.9],
-    [{source: '(p) Sanctórum', target: '(k) San Andres Cholula'}, 14],
-    [{source: '(k) San Andres Cholula', target: '(a) Puebla'}, 11.3],
-    [{source: '(d) Atlixco', target: '(i) Tlaxcalancingo'}, 24.5],
-    [{source: '(i) Tlaxcalancingo', target: '(a) Puebla'}, 10.2],
-    [{ source: '(c) Cholula de Rivadavia', target: '(u) Cuautlancingo'}, 5],
-    [{source: '(p) Sanctórum', target: '(u) Cuautlancingo'}, 10],
-    [{source: '(e) Amozoc', target: '(w) Acajete'}, 13.5],
-    [{source: '(v) Ciudad Serdán', target: '(s) Acatzingo'}, 58],
-    [{source: '(v) Ciudad Serdán', target: '(b) Tehuacan'}, 68.8]
-])
-
-
-
-
-
-
-
-//La lista por separado de los pesos de las aristas
-let w = [
-    22, 63.7, 21.9, 26.3, 30.3, 133, 20.8, 199,
-    57.5, 21.5, 18.7, 41.2, 25, 39.4, 55.1, 6.2,
-    22.1, 44.6, 16.5, 19.9, 3, 12.8, 13.9, 14, 11.3,
-    24.5, 10.2,5,10,13.5,58,68.8
-]
+const G = new Map(edgesArr)
 
 //Conjunto de aristas conectadas
 const A = new Set()
@@ -89,7 +18,6 @@ function MST_KRUSKAL(G, w) {
     })
 
     G.forEach(function(value, element){
-        // console.log(element)
         let v1 = element.source;
         let v2 = element.target;
         helper2.add(v1);
@@ -99,13 +27,11 @@ function MST_KRUSKAL(G, w) {
     helper2.forEach(function(value){
         let newSet = new Set()
         newSet.add(value)
-        // console.log(newSet)
         helperset.add(newSet)
     })
 
     for(let i = 0; i<G.size; i++){
         let ars = FIND_AR(G, w[i])
-        // console.log(ars)
         let v1 = ars.source;
         let v2 = ars.target;
         if(FIND_SET(v1) != FIND_SET(v2)){
@@ -174,25 +100,15 @@ function FIND_AR(G, weight) {
     return ars
 }
 
-
-
-
 MST_KRUSKAL(G, w)
 
 
-function getSetValueByIndex(setObj, index) {
-    return [...setObj][index]
-}
 
+let allValues = A.entries(); //Iterador
+let mstKey1, mstKey2 // Llaves para crear los id de las aristas, e.g. "qa"
+let delayMST = 250
 
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-let allValues = A.entries();
-
-let mstKey1, mstKey2
+/*En base al recorrido del algoritmo ilumina el grafo por orden*/
 let startMST = async () => {
     isRunning = true;
     let currentNode = allValues.next()
@@ -203,12 +119,12 @@ let startMST = async () => {
     mstKey1 = getSetValueByIndex(currentNode.value[0],0).substring(1,2)
     mstKey2 = getSetValueByIndex(currentNode.value[0],1).substring(1,2)
     cy.elements().getElementById(getSetValueByIndex(currentNode.value[0],0)).addClass('highlighted')
-    await sleep(1000)
+    await sleep(delayMST)
     cy.elements().getElementById(getSetValueByIndex(currentNode.value[0],1)).addClass('highlighted')
     // currentNode = allValues.next()
     cy.edges().getElementById(mstKey1+mstKey2).addClass('highlighted')
     cy.edges().getElementById(mstKey2+mstKey1).addClass('highlighted')
-    await sleep(1000)
+    await sleep(delayMST)
     if(!isRunning) return
     startMST()
 }

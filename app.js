@@ -1,5 +1,5 @@
-let isRunning = false;
-
+ 
+/*Setup de la librería para representar el grafo.*/
 var cy = cytoscape({
     container: document.getElementById('cy'),
   
@@ -99,4 +99,21 @@ var cy = cytoscape({
     }
   });
 
+/*Acomoda las coordenadas representando el ordenamiento real */
+setCoordinates()
   
+/*Configuraciones para los algoritmos*/
+let isRunning = false;
+let verticesArr = []
+let edgesArr = []
+let w = []
+
+/*Llenado de verices, aristas y pesos*/
+for(node of cy.nodes()){
+  verticesArr.push([node.data().id])
+}
+
+for(edge of cy.edges()){
+  edgesArr.push([{source:edge.data().source, target: edge.data().target},edge.data().weight])
+  w.push(edge.data().weight)
+}
