@@ -49,7 +49,7 @@ const G = new Map([
     [{source: '(t) Huejotzingo', target: '(k) San Andres Cholula' }, 19.9],
     [{source: '(c) Cholula de Rivadavia', target: '(k) San Andres Cholula' }, 3],
     [{source: '(c) Cholula de Rivadavia', target: '(p) Sanctórum'}, 12.8],
-    [{source: '(p) Sanctórum', target: '(a) Puebla'}, 14],
+    [{source: '(p) Sanctórum', target: '(a) Puebla'}, 13.9],
     [{source: '(p) Sanctórum', target: '(k) San Andres Cholula'}, 14],
     [{source: '(k) San Andres Cholula', target: '(a) Puebla'}, 11.3],
     [{source: '(d) Atlixco', target: '(i) Tlaxcalancingo'}, 24.5],
@@ -71,7 +71,7 @@ const G = new Map([
 let w = [
     22, 63.7, 21.9, 26.3, 30.3, 133, 20.8, 199,
     57.5, 21.5, 18.7, 41.2, 25, 39.4, 55.1, 6.2,
-    22.1, 44.6, 16.5, 19.9, 3, 12.8, 14, 14, 11.3,
+    22.1, 44.6, 16.5, 19.9, 3, 12.8, 13.9, 14, 11.3,
     24.5, 10.2,5,10,13.5,58,68.8
 ]
 
@@ -206,7 +206,7 @@ let startMST = async () => {
     cy.elements().getElementById(getSetValueByIndex(currentNode.value[0],0)).addClass('highlighted')
     await sleep(1000)
     cy.elements().getElementById(getSetValueByIndex(currentNode.value[0],1)).addClass('highlighted')
-    currentNode = allValues.next()
+    // currentNode = allValues.next()
     cy.edges().getElementById(mstKey1+mstKey2).addClass('highlighted')
     cy.edges().getElementById(mstKey2+mstKey1).addClass('highlighted')
     await sleep(1000)
