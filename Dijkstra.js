@@ -13,9 +13,9 @@ class WeightedGraph {
         const nodes = new PriorityQueue();
         const distances = {};
         const previous = {};
-        let path = [] //to return at end
+        let path = [] 
         let smallest;
-        //build up initial state
+        
         for(let vertex in this.adjacencyList){
             if(vertex === start){
                 distances[vertex] = 0;
@@ -26,14 +26,14 @@ class WeightedGraph {
             }
             previous[vertex] = null;
         }
-        // as long as there is something to visit
+        
         while(nodes.values.length){
             smallest = nodes.dequeue().val;
-            // console.log(finish,smallest)
+            
 
             if(smallest === finish){
-                //WE ARE DONE
-                //BUILD UP PATH TO RETURN AT END
+                
+                
                 while(previous[smallest]){
 
                     path.push(smallest);
@@ -43,19 +43,19 @@ class WeightedGraph {
             } 
             if(smallest || distances[smallest] !== Infinity){
                 for(let neighbor in this.adjacencyList[smallest]){
-                    //find neighboring node
+                    
                     let nextNode = this.adjacencyList[smallest][neighbor];
-                    // console.log(nextNode)
+                    
 
-                    //calculate new distance to neighboring node
+                    
                     let candidate = distances[smallest] + nextNode.weight;
                     let nextNeighbor = nextNode.node;
                     if(candidate < distances[nextNeighbor]){
-                        //updating new smallest distance to neighbor
+                        
                         distances[nextNeighbor] = candidate;
-                        //updating previous - How we got to neighbor
+                        
                         previous[nextNeighbor] = smallest;
-                        //enqueue in priority queue with new priority
+                        
                         nodes.enqueue(nextNeighbor, candidate);
                     }
                 }
@@ -162,7 +162,7 @@ let drawShortestPath = async () => {
         isRunning = false;
         return
     }
-    // console.log(shortestPath[curNodeIndex])
+    
     cy.elements().getElementById(shortestPath[curNodeIndex]).addClass('highlighted')
     await sleep(1000)
     curNodeIndex++
@@ -205,7 +205,7 @@ btn3.addEventListener("click",()=>{
 
 
 
-//   
+
 
 
   
@@ -219,7 +219,7 @@ btn3.addEventListener("click",()=>{
     let newOption
     for (const v of vertex) {
         let currentV = vertexEntries.next().value
-        // graph.addVertex(currentV[0])
+        
     
         newOption = document.createElement('option')
         newOption.innerText = currentV[0]
