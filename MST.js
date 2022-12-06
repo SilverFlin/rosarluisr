@@ -192,7 +192,7 @@ function sleep(ms) {
 
 let allValues = A.entries();
 
-
+let mstKey1, mstKey2
 let startMST = async () => {
     isRunning = true;
     let currentNode = allValues.next()
@@ -201,11 +201,14 @@ let startMST = async () => {
         return
     }
     console.log(currentNode.value)
+    mstKey1 = getSetValueByIndex(currentNode.value[0],0).substring(1,2)
+    mstKey2 = getSetValueByIndex(currentNode.value[0],1).substring(1,2)
     cy.elements().getElementById(getSetValueByIndex(currentNode.value[0],0)).addClass('highlighted')
     await sleep(1000)
     cy.elements().getElementById(getSetValueByIndex(currentNode.value[0],1)).addClass('highlighted')
     currentNode = allValues.next()
-    
+    cy.edges().getElementById(mstKey1+mstKey2).addClass('highlighted')
+    cy.edges().getElementById(mstKey2+mstKey1).addClass('highlighted')
     await sleep(1000)
     if(!isRunning) return
     startMST()

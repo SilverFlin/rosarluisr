@@ -153,19 +153,29 @@ for (let i = 0; i < G.size; i++) {
 
   
   
-let shortestPath;
-
-let curNodeIndex;
+let shortestPath,curNodeIndex, key1,key2
 let drawShortestPath = async () => {
     isRunning = true;
     if(curNodeIndex === shortestPath.length) {
         isRunning = false;
         return
     }
-    
+    key1 = shortestPath[curNodeIndex].substring(1,2)
     cy.elements().getElementById(shortestPath[curNodeIndex]).addClass('highlighted')
+    
+
     await sleep(1000)
     curNodeIndex++
+    cy.elements().getElementById(shortestPath[curNodeIndex]).addClass('highlighted')
+    
+    key2 = shortestPath[curNodeIndex]?.substring(1,2)
+    
+
+    console.log(key1+key2)
+    cy.edges().getElementById(key1+key2).addClass('highlighted')
+    cy.edges().getElementById(key2+key1).addClass('highlighted')
+    // curNodeIndex++
+    await sleep(1000)
     if(!isRunning) return
     drawShortestPath()
 }
