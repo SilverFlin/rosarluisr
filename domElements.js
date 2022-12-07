@@ -31,6 +31,10 @@ btnReset.addEventListener("click",()=>{
         let currentV = vertexEntries.next().value
         cy.elements().getElementById(currentV[0]).removeClass('highlighted')
     }
+    for(const e of cy.edges()){
+        let currentE = e.data().id
+        cy.elements().getElementById(currentE).removeClass('highlighted')
+    }
 })
 btnReset.classList.add('btn', 'btn-danger')
 
